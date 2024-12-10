@@ -1,1 +1,1 @@
-# coffee-house-pos-go
+# Coffee House POS - Go
