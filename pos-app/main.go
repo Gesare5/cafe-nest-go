@@ -41,16 +41,16 @@ func handleSelection(coffeeChoice int, quantity int) {
 }
 
 func handlePrelimAction(action string) {
-	COFFEE_TABLE_SELECTION_LIST := []string{"0 Done!!", "0 Done!!"}
+	COFFEE_TABLE_SELECTION_LIST := []string{"0 Done!!", "2 Done!!"}
 	switch action {
 	case "a":
 		COFFEE_TABLE_SELECTION_LIST = append(COFFEE_TABLE_SELECTION_LIST, "3 Done!!")
-		looping := true
-		for looping == true {
+		// looping := true
+		for i := 0; i < 15; i++ {
 			print("")
 			generate_table(COFFEE_TABLE_SELECTION_LIST)
 			coffeeChoice := ""
-			go fmt.Scanf("%d", &coffeeChoice)
+			fmt.Scanln(&coffeeChoice)
 			coffeeChoiceInt, err := strconv.Atoi(coffeeChoice)
 			if err != nil {
 				coffeeChoiceInt = 0
@@ -62,14 +62,15 @@ func handlePrelimAction(action string) {
 				} else {
 					print("How many? ")
 					quantity := ""
-					fmt.Scanf("%d", &quantity)
+					fmt.Scanln(&quantity)
+					// (strings.TrimSpace(input)
 					quantityInt, err := strconv.Atoi(quantity)
 					if err == nil {
 						handleSelection(coffeeChoiceInt, quantityInt)
-						print("")
+						println("")
 					} else {
-						print("Invalid value!!")
-						print("")
+						println("Invalid value!!")
+						println("")
 						break
 					}
 				}
@@ -96,13 +97,13 @@ func main() {
 	fmt.Print("Date", time.Now())
 	println("Welcome to TeleBaristas!")
 	println("")
-	keepLooping := true
-	for keepLooping == true {
+	// keepLooping := true
+	for i := 0; i < 15; i++ {
 		for _, value := range prelimList() {
 			println(value)
 		}
-		prelimAction := ""
-		fmt.Scanf("%s", &prelimAction)
+		prelimAction := "a"
+		fmt.Scanln(&prelimAction)
 		prelimAction = strings.ToLower(prelimAction)
 		if prelimAction == "c" {
 			break
