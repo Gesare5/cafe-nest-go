@@ -20,7 +20,7 @@ func readFromStore(filename string) []string {
 	return dataList
 }
 
-func writeToStore(filename string, data string) {
+func saveToStore(filename string, data string) {
 	// ADD/APPEND DATA TO STORE
 	oldData, err := os.ReadFile(filename)
 	check(err)
