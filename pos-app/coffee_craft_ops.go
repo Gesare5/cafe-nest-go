@@ -1,28 +1,33 @@
 package main
 
-func get_totals() map[string]float32 {
-	totals := map[string]float32{
-		"coffee":  10000,
-		"milk":    10000,
-		"sugar":   10000,
-		"vanilla": 1000,
-		"cocoa":   200,
+import (
+	"strconv"
+	"strings"
+)
+
+func GetTotals() map[string]float64 {
+	dataList := readFromStore("totals.csv")
+	totals := map[string]float64{}
+	var err error
+	for _, value := range dataList {
+		supplies := strings.Split(value, ",")
+		totals[supplies[0]], err = strconv.ParseFloat(strings.Trim(supplies[1], " "), 32)
+		check(err)
 	}
 	return totals
 }
 
-func getThresholds() map[string]float32 {
-	thresholds := map[string]float32{
-		"coffee":  10000,
-		"milk":    10000,
-		"sugar":   10000,
-		"vanilla": 1000,
-		"cocoa":   200,
+func GetThresholds() map[string]float64 {
+	dataList := readFromStore("thresholds.csv")
+	thresholds := map[string]float64{}
+	var err error
+	for _, value := range dataList {
+		supplies := strings.Split(value, ",")
+		thresholds[supplies[0]], err = strconv.ParseFloat(strings.Trim(supplies[1], " "), 32)
+		check(err)
 	}
 	return thresholds
 }
-
-// TODO: Read above values from files - later
 
 func populateCoffeeItems() {
 	return
