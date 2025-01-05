@@ -1,2 +1,6 @@
 coffee_type,milk,coffee,sugar,vanilla,cocoa,cost
 caffe latte,150,18,30,0,0,12
+vanilla latte,150,18,30,30,0,14
+espresso,0,18,30,0,0,10
+cappuccino,150,18,30,0,0,14.5
+caffe mocha,120,16,35,0,30,13

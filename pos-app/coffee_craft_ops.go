@@ -29,10 +29,15 @@ func GetThresholds() map[string]float64 {
 	return thresholds
 }
 
-func populateCoffeeItems() {
-	return
-}
-
-func generateCoffeeList() {
-	return
+func generateCoffeeList() []string {
+	readList := readFromStore("coffee_items.csv")
+	coffeeList := []string{}
+	for index, value := range readList {
+		if index > 0 {
+			innerList := strings.Split(value, ",")
+			coffeeItem := strconv.Itoa(index) + ": " + string(innerList[0])
+			coffeeList = append(coffeeList, coffeeItem)
+		}
+	}
+	return coffeeList
 }
