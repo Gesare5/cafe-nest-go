@@ -36,17 +36,35 @@ func generate_table(lst []string) {
 	}
 }
 
-func handleSelection(coffeeChoice int, quantity int) {
+func craftACoffee(coffeeType string) {
+	println("creafting coffee........")
+}
+
+func handleSelection(choice int, quantity int) {
 	println("Handle selection")
+	COFFEE_SELECTION_LIST := generateCoffeeList()
+	choiceList := strings.Split(COFFEE_SELECTION_LIST[choice-1], " ")
+	coffeeType := " "
+	if len(choiceList) >= 3 {
+		choiceList = []string{choiceList[1], choiceList[2]}
+		coffeeType = strings.ToLower(strings.Join(choiceList, " "))
+	} else {
+		coffeeType = strings.ToLower(choiceList[1])
+	}
+	println(coffeeType)
+	for i := 0; i < quantity; i++ {
+		craftACoffee(coffeeType)
+	}
+	return
 }
 
 func handlePrelimAction(action string) {
-	COFFEE_TABLE_SELECTION_LIST := []string{"0 Done!!", "2 Done!!"}
+	COFFEE_TABLE_SELECTION_LIST := generateCoffeeList()
 	switch action {
 	case "a":
-		COFFEE_TABLE_SELECTION_LIST = append(COFFEE_TABLE_SELECTION_LIST, "3 Done!!")
+		COFFEE_TABLE_SELECTION_LIST = append(COFFEE_TABLE_SELECTION_LIST, "0: Done!!")
 		// looping := true
-		for i := 0; i < 15; i++ {
+		for i := 0; i < 30; i++ {
 			print("")
 			generate_table(COFFEE_TABLE_SELECTION_LIST)
 			coffeeChoice := ""
@@ -94,7 +112,7 @@ func handlePrelimAction(action string) {
 
 func main() {
 	println("Good day!")
-	fmt.Print("Date", time.Now())
+	fmt.Println("Date", time.Now())
 	println("Welcome to TeleBaristas!")
 	println("")
 	// keepLooping := true
