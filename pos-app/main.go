@@ -36,10 +36,6 @@ func generate_table(lst []string) {
 	}
 }
 
-func craftACoffee(coffeeType string) {
-	println("creafting coffee........")
-}
-
 func handleSelection(choice int, quantity int) {
 	println("Handle selection")
 	COFFEE_SELECTION_LIST := generateCoffeeList()
