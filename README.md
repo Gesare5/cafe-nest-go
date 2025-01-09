@@ -1,5 +1,5 @@
 # Cafe Nest
-A sample system for a coffee house-Cafe Nest.
+A sample system for a coffee house - Cafe Nest.
 Console-app.
 
 ## Table of Contents
@@ -8,7 +8,7 @@ Console-app.
 - [Features](#features)
 
 ## Installation
-Note: Using go V1.22.3
+Note: Using go v1.22.3
 
 1. Clone the repository:
 ```bash
