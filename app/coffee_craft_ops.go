@@ -63,17 +63,20 @@ func craftACoffee(coffeeType string) {
 	// read from store
 	readList := readFromStore("coffee_items.csv")
 	coffee := map[string]float64{}
-	for _, value := range readList {
-		innerList := strings.Split(value, ",")
+	headers := []string{}
+	for i, value := range readList {
 		var err error
-		if innerList[0] == coffeeType {
-			coffee["milk"], err = strconv.ParseFloat(innerList[1], 32)
-			coffee["coffee"], err = strconv.ParseFloat(innerList[2], 32)
-			coffee["sugar"], err = strconv.ParseFloat(innerList[3], 32)
-			coffee["vanilla"], err = strconv.ParseFloat(innerList[4], 32)
-			coffee["cocoa"], err = strconv.ParseFloat(innerList[5], 32)
-			// TODO: refactor this
-			check(err)
+		coffeeIngredientsList := strings.Split(value, ",")
+		if i == 0 {
+			headers = strings.Split(value, ",")
+		}
+		if coffeeIngredientsList[0] == coffeeType {
+			for index, value := range coffeeIngredientsList {
+				if index > 0 {
+					coffee[headers[index]], err = strconv.ParseFloat(value, 32)
+					check(err)
+				}
+			}
 		}
 	}
 
