@@ -12,8 +12,10 @@ func GetTotals() map[string]float64 {
 	var err error
 	for _, value := range dataList {
 		supplies := strings.Split(value, ",")
-		totals[supplies[0]], err = strconv.ParseFloat(strings.Trim(supplies[1], " "), 32)
-		check(err)
+		if len(supplies) > 1 {
+			totals[supplies[0]], err = strconv.ParseFloat(strings.Trim(supplies[1], " "), 32)
+			check(err)
+		}
 	}
 	return totals
 }
@@ -84,13 +86,11 @@ func craftACoffee(coffeeType string) {
 	newTotals := subtractUsedQuantititesFromTotal(coffee, coffeeType)
 
 	// update inventory
-	dataString := "coffee," + fmt.Sprintf("%f", newTotals["coffee"]) + "\n" +
-		"milk," + fmt.Sprintf("%f", newTotals["milk"]) + "\n" +
-		"sugar," + fmt.Sprintf("%f", newTotals["sugar"]) + "\n" +
-		"vanilla," + fmt.Sprintf("%f", newTotals["vanilla"]) + "\n" +
-		"cocoa," + fmt.Sprintf("%f", newTotals["cocoa"]) + "\n"
-	//TODO: refactor this
-	saveToStore("inventory.csv", dataString)
+	dataString := ""
+	for key, value := range newTotals {
+		dataString = dataString + key + "," + fmt.Sprintf("%.2f", value) + "\n"
+	}
+	saveToStore("totals.csv", dataString)
 
 	// Print Report - Much Later
 }
