@@ -22,8 +22,8 @@ func readFromStore(filename string) []string {
 
 func saveToStore(filename string, data string) {
 	// ADD/APPEND DATA TO STORE
+	fmt.Println("Opening file")
 	oldData, err := os.ReadFile(filename)
-	check(err)
 	dataString := string(oldData)
 
 	fmt.Println("Writing file")

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 )
 
 func GetTotals() map[string]float64 {
@@ -92,5 +93,9 @@ func craftACoffee(coffeeType string) {
 	}
 	saveToStore("totals.csv", dataString)
 
-	// Print Report - Much Later
+	//  Save to daily report
+	reportName := fmt.Sprintf("Daily_Sales_%s.csv", time.Now().Format(time.DateOnly))
+	reportData := []string{coffeeType, fmt.Sprintf("%.2f", coffee["cost"]), time.Now().Format(time.DateTime)}
+	reportDataString := strings.Join(reportData, ",")
+	saveToStore(reportName, reportDataString)
 }
