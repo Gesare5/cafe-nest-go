@@ -21,23 +21,12 @@ func manageCoffeeItemsList() []string {
 		"1: Add Coffee Item",
 		"2: Delete Coffee Item",
 		"3: View Coffee Items",
+		"4: Add Supplies",
 	}
 	return manageCoffeeList
 }
 
-func manageCoffeeItems(coffeeChoice int) {
-	println("manageee!")
-	println(coffeeChoice)
-}
-
-func generate_table(lst []string) {
-	for _, value := range lst {
-		println(value)
-	}
-}
-
 func handleSelection(choice int, quantity int) {
-	println("Handle selection")
 	COFFEE_SELECTION_LIST := generateCoffeeList()
 	choiceList := strings.Split(COFFEE_SELECTION_LIST[choice-1], " ")
 	coffeeType := " "
@@ -59,10 +48,9 @@ func handlePrelimAction(action string) {
 	switch action {
 	case "a":
 		COFFEE_TABLE_SELECTION_LIST = append(COFFEE_TABLE_SELECTION_LIST, "0: Done!!")
-		// looping := true
 		for i := 0; i < 30; i++ {
 			print("")
-			generate_table(COFFEE_TABLE_SELECTION_LIST)
+			generateTable(COFFEE_TABLE_SELECTION_LIST)
 			coffeeChoice := ""
 			fmt.Scanln(&coffeeChoice)
 			coffeeChoiceInt, err := strconv.Atoi(coffeeChoice)
@@ -77,7 +65,6 @@ func handlePrelimAction(action string) {
 					print("How many? ")
 					quantity := ""
 					fmt.Scanln(&quantity)
-					// (strings.TrimSpace(input)
 					quantityInt, err := strconv.Atoi(quantity)
 					if err == nil {
 						handleSelection(coffeeChoiceInt, quantityInt)
@@ -95,7 +82,7 @@ func handlePrelimAction(action string) {
 		}
 	case "b":
 		print("")
-		generate_table(manageCoffeeItemsList())
+		generateTable(manageCoffeeItemsList())
 		coffeeItemsChoice := 0
 		fmt.Scanf("%d", &coffeeItemsChoice)
 		manageCoffeeItems(coffeeItemsChoice)
@@ -111,7 +98,6 @@ func main() {
 	fmt.Println("Date", time.Now())
 	println("Welcome to TeleBaristas!")
 	println("")
-	// keepLooping := true
 	for i := 0; i < 15; i++ {
 		for _, value := range prelimList() {
 			println(value)
