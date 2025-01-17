@@ -95,7 +95,6 @@ func craftACoffee(coffeeType string) {
 
 	//  Save to daily report
 	reportName := fmt.Sprintf("Daily_Sales_%s.csv", time.Now().Format(time.DateOnly))
-	reportData := []string{coffeeType, fmt.Sprintf("%.2f", coffee["cost"]), time.Now().Format(time.DateTime)}
-	reportDataString := strings.Join(reportData, ",")
+	reportDataString := fmt.Sprintf("%s,%.2f,%s", coffeeType, coffee["cost"], time.Now().Format(time.DateTime))
 	saveToStore(reportName, reportDataString)
 }

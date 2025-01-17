@@ -46,9 +46,3 @@ func overwriteStore(filename string, data string) error {
 	fmt.Printf("File name: %s \n", file.Name())
 	return nil
 }
-
-// func main() {
-// 	data := "blue,150,18,30,0,0,12"
-// 	writeToStore("coffee_items.csv", data)
-// 	overwriteStore("coffee_items.csv", data)
-// }
