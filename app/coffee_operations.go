@@ -98,3 +98,47 @@ func craftACoffee(coffeeType string) {
 	reportDataString := fmt.Sprintf("%s,%.2f,%s", coffeeType, coffee["cost"], time.Now().Format(time.DateTime))
 	saveToStore(reportName, reportDataString)
 }
+
+func addNewCoffeeItem() {
+	println("Add New Coffee Type!")
+	println("")
+}
+
+func removeCoffeeItem() {
+	println("Remove Coffee Type!")
+	println("")
+}
+
+func replenishInventory(supplyItem string, amount string) {
+	println("Replenish Inventory")
+	floatAmount, err := strconv.ParseFloat(amount, 32)
+	println(amount)
+	println(floatAmount)
+	println("")
+	check(err)
+}
+
+func manageCoffeeItems(choice int) {
+	COFFEE_TABLE_SELECTION_LIST := generateCoffeeList()
+
+	if choice == 1 {
+		addNewCoffeeItem()
+	} else if choice == 2 {
+		removeCoffeeItem()
+	} else if choice == 4 {
+		supplies := []string{"1: Milk", "2: Coffee", "3: Sugar", "4: Cocoa", "5: Vanilla"}
+		// Read this from file
+		println("Select supply: ")
+		generateTable(supplies)
+		supply := 0
+		fmt.Scanln(&supply)
+		println("")
+		println("Amount in grams/millilitre: ")
+		amount := ""
+		fmt.Scanln(&amount)
+		println("")
+		replenishInventory(supplies[supply-1], amount)
+	} else {
+		generateTable(COFFEE_TABLE_SELECTION_LIST)
+	}
+}
