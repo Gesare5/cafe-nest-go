@@ -101,7 +101,38 @@ func craftACoffee(coffeeType string) {
 
 func addNewCoffeeItem() {
 	println("Add New Coffee Type!")
+
+	// fetch headers in coffee_items.csv
+	readList := readFromStore("coffee_items.csv")
+	headers := []string{}
+	newCoffeeItem := []string{}
+	for i, value := range readList {
+		if i == 0 {
+			headers = strings.Split(value, ",")
+		} else {
+			break
+		}
+	}
+	input := ""
+	for _, header := range headers {
+		if header == "coffee_type" {
+			println("Name of Coffee? ")
+			fmt.Scanln(&input)
+		} else {
+			fmt.Printf("%s amount: ", header)
+			fmt.Scanln(&input)
+			if err := validateNumberInput(input); err != nil {
+				println("Invalid Input!! Try again.")
+				break
+			}
+		}
+		newCoffeeItem = append(newCoffeeItem, input)
+	}
 	println("")
+	if len(newCoffeeItem) == len(headers) {
+		newCoffeeItemString := strings.Join(newCoffeeItem, ",")
+		saveToStore("coffee_items.csv", newCoffeeItemString)
+	}
 }
 
 func removeCoffeeItem() {
