@@ -141,12 +141,18 @@ func removeCoffeeItem() {
 }
 
 func replenishInventory(supplyItem string, amount string) {
-	println("Replenish Inventory")
+	println("Replenish Inventory!")
 	floatAmount, err := strconv.ParseFloat(amount, 32)
-	println(amount)
-	println(floatAmount)
-	println("")
 	check(err)
+	supply := strings.ToLower(strings.Split(supplyItem, " ")[1])
+	totals := GetTotals()
+	totals[supply] = totals[supply] + floatAmount
+	storeData := ""
+	for key, value := range totals {
+		storeData = storeData + fmt.Sprintf("%s,%.2f \n", key, value)
+	}
+	saveToStore("totals.csv", storeData)
+	println("")
 }
 
 func manageCoffeeItems(choice int) {
