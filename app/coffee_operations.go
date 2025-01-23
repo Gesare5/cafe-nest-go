@@ -136,7 +136,33 @@ func addNewCoffeeItem() {
 }
 
 func removeCoffeeItem() {
-	println("Remove Coffee Type!")
+	COFFEE_TABLE_SELECTION_LIST := generateCoffeeList()
+	choice := 0
+	coffeeType := " "
+
+	// Print coffee menu selection
+	println("Choose coffee Item to remove")
+	generateTable(COFFEE_TABLE_SELECTION_LIST)
+	fmt.Scanln(&choice)
+	choiceList := strings.Split(COFFEE_TABLE_SELECTION_LIST[choice-1], " ")
+	if len(choiceList) >= 3 {
+		choiceList = []string{choiceList[1], choiceList[2]}
+		coffeeType = strings.ToLower(strings.Join(choiceList, " "))
+	} else {
+		coffeeType = strings.ToLower(choiceList[1])
+	}
+
+	// read store and remove selected coffee_item from list
+	coffeeItemsList := readFromStore("coffee_items.csv")
+	for index, value := range coffeeItemsList {
+		innerList := strings.Split(value, ",")
+		if innerList[0] == coffeeType {
+			coffeeItemsList = append(coffeeItemsList[:index], coffeeItemsList[index+1:]...)
+		}
+	}
+
+	// Publish altered list (with removed coffee_item) to store
+	overwriteStore("coffee_items.csv", strings.Join(coffeeItemsList, "\n"))
 	println("")
 }
 
