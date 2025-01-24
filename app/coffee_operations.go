@@ -162,7 +162,12 @@ func removeCoffeeItem() {
 	}
 
 	// Publish altered list (with removed coffee_item) to store
-	overwriteStore("coffee_items.csv", strings.Join(coffeeItemsList, "\n"))
+	err := overwriteStore("coffee_items.csv", strings.Join(coffeeItemsList, "\n"))
+	if err != nil {
+		println("Failed To Remove Coffee Item. Try Again!!")
+	} else {
+		println("Successfully Removed Coffee Item")
+	}
 	println("")
 }
 
